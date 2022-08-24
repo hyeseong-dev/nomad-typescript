@@ -11,9 +11,9 @@ class Block implements BlackShape {
     public hash: string;
 
     constructor(
-        public prevHash: string,
-        public height: number,
-        public data: string
+        public readonly prevHash: string,
+        public readonly height: number,
+        public readonly data: string
     ) {
         this.hash = Block.calculateHash(prevHash, height, data)
     }
@@ -37,7 +37,8 @@ class Blockchain {
         this.blocks.push(newBlock);
     }
     public getBlocks() {
-        return this.blocks
+        //return this.blocks
+        return [...this.blocks]
     }
 }
 
@@ -46,4 +47,7 @@ const blockchain = new Blockchain();
 blockchain.addBlock('1st');
 blockchain.addBlock('2nd');
 blockchain.addBlock('3rd');
+
+blockchain.getBlocks().push(new Block("xxxx", 11111, "HACKEDDDDDD"))
+
 console.log(blockchain.getBlocks());
